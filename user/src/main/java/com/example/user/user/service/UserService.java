@@ -7,5 +7,5 @@ import com.example.user.user.entity.User;
 public interface UserService {
     public String login(LoginRequest loginRequest);
     public void register(RegisterRequest request);
-//    public Boolean checkDuplicate(String id);
+    public Boolean checkDup(String id);
 }

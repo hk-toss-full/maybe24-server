@@ -27,7 +27,8 @@ public class CustomSecurityConfig {
                 request -> request
                         .requestMatchers(
                                 "/auth/login",
-                                "/auth/register"
+                                "/auth/register",
+                                "/auth/check-dup"
                         )
                         .permitAll()
                         .anyRequest()

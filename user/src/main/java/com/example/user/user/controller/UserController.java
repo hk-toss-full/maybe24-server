@@ -1,13 +1,11 @@
 package com.example.user.user.controller;
 
+import com.example.user.user.dto.CheckDupRequest;
 import com.example.user.user.dto.LoginRequest;
 import com.example.user.user.dto.RegisterRequest;
 import com.example.user.user.service.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,6 +21,12 @@ public class UserController {
     @PostMapping("/register")
     public void register(@RequestBody RegisterRequest request) {
         userServiceImpl.register(request);
+    }
+
+    @PostMapping("/check-dup")
+    public Boolean checkDup(@RequestBody CheckDupRequest request) {
+        System.out.println(request.userId());
+        return userServiceImpl.checkDup(request.userId());
     }
 
 }

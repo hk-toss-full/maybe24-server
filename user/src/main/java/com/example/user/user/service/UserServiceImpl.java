@@ -24,7 +24,6 @@ public class UserServiceImpl implements UserService {
         if(loginUser.isEmpty())
             throw new RuntimeException("해당 아이디를 가진 사용자가 없습니다");
         User user = loginUser.get();
-        System.out.println(loginRequest.userId()+"      "+user.getPassword());
         if(!passwordEncoder.matches(
                 loginRequest.password(), user.getPassword()))
             throw new RuntimeException("아이디와 비밀번호가 일치하지 않습니다");
@@ -39,9 +38,10 @@ public class UserServiceImpl implements UserService {
         userRepository.save(loggedInUser);
     }
 
-//    @Override
-//    public Boolean checkDuplicate(String id){
-//        Optional<User> byUserId = userRepository.findUserByUserId(id);
-//        return byUserId.isEmpty();
-//    }
+    @Override
+    public Boolean checkDup(String id){
+        Optional<User> byUserId = userRepository.findUserByUserId(id);
+        System.out.println(byUserId+"  "+byUserId.isPresent());
+        return byUserId.isEmpty();
+    }
 }

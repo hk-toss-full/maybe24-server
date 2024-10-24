@@ -1,0 +1,25 @@
+extend type Query {
+    getRoundById(id: ID!): Round
+    getAllRounds: [Round]
+}
+
+extend type Mutation {
+    createRound(roundInput: RoundInput): Round
+    updateRound(id: ID!, roundInput: RoundInput): Round
+    deleteRound(id: ID!): Boolean
+}
+
+type Round {
+    id: ID
+    date: String
+    totalCnt: Int
+    price: Int
+    product: Product
+}
+
+input RoundInput {
+    date: String
+    totalCnt: Int
+    price: Int
+    productId: ID!
+}

@@ -8,7 +8,7 @@ spring:
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
-            - Path=/api/v1/auth/**
+            - Path=/auth/**
         # add your service
 eureka:
   instance:

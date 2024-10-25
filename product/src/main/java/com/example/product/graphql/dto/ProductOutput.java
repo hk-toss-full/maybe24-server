@@ -18,6 +18,7 @@ public class ProductOutput {
     private String place;
     private String description;
     private int view_cnt;
+    private String productImgUrl;
     private List<Round> dateList;
     private List<Discount> discounts;
 

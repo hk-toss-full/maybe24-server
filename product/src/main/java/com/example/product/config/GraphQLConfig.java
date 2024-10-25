@@ -8,8 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.graphql.execution.RuntimeWiringConfigurer;
 import org.springframework.stereotype.Component;
 
-import graphql.schema.idl.RuntimeWiring;
-
 @RequiredArgsConstructor
 @Component
 public class GraphQLConfig {

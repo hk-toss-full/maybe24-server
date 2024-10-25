@@ -20,5 +20,4 @@ public class Round {
     @ManyToOne
     @JoinColumn(name="PRODUCT_ID")
     private Product product;
-
 }

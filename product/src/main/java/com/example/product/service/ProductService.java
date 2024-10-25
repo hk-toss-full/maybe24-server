@@ -1,6 +1,8 @@
 package com.example.product.service;
 
 import com.example.product.entity.Product;
+import com.example.product.entity.ProductImg;
+import com.example.product.graphql.dto.ProductImgOutput;
 import com.example.product.graphql.dto.ProductOutput;
 import com.example.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductService{
     private final ProductRepository productRepository;
+    private final ProductImgService productImgService;
 
     public ProductOutput getProductById(Long productId) {
         Product product = productRepository.findById(productId)
@@ -23,7 +26,6 @@ public class ProductService{
         List<ProductOutput> list = productRepository.findAll().stream()
                 .map(this::convertToProductOutput)
                 .toList();
-        System.out.println("productList: "+list);
         return list;
     }
 
@@ -43,6 +45,9 @@ public class ProductService{
     }
 
     private ProductOutput convertToProductOutput(Product product) {
+        ProductImgOutput productImg = convertToProductImgOutput(
+                productImgService.findByProductId(product.getProductId().toString())
+        );
         return new ProductOutput(
                 product.getProductId(),
                 product.getTitle(),
@@ -50,8 +55,17 @@ public class ProductService{
                 product.getPlace(),
                 product.getDescription(),
                 product.getView_cnt(),
+                productImg.getProductImgUrl(),
                 product.getDateList(),
                 product.getDiscounts()
+        );
+    }
+
+    private ProductImgOutput convertToProductImgOutput(ProductImg productImg) {
+        return new ProductImgOutput(
+                productImg.getProductImgId(),
+                productImg.getProductImgUrl(),
+                productImg.getProductId()
         );
     }
 }

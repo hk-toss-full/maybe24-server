@@ -8,10 +8,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @Getter
 @Document(collection = "productImg")
-public class ProductImage {
+public class ProductImg {
     @Id
-    private String id;
-    private Long productId;
-    private String imageUrl;
+    private String productImgId;
+    private String productImgUrl;
+    private String productId;
 }
 

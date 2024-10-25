@@ -17,8 +17,15 @@ type ProductOutput {
     place: String
     description: String
     view_cnt: Int
+    productImgUrl: String
     dateList: [RoundOutput]
     discounts: [DiscountOutput]
+}
+
+type ProductImgOutput {
+    productImgId: ID
+    imageUrl: String
+    productId: ID
 }
 
 type RoundOutput {

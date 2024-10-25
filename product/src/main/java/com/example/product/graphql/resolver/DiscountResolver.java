@@ -2,7 +2,6 @@ package com.example.product.graphql.resolver;
 
 import com.example.product.graphql.dto.DiscountOutput;
 import com.example.product.service.DiscountService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;

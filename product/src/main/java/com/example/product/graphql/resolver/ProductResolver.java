@@ -1,6 +1,8 @@
 package com.example.product.graphql.resolver;
 
+import com.example.product.entity.ProductImg;
 import com.example.product.graphql.dto.ProductOutput;
+import com.example.product.service.ProductImgService;
 import com.example.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -8,24 +10,62 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class ProductResolver{
+public class ProductResolver {
     private final ProductService productService;
+    private final ProductImgService productImgService;
 
     @QueryMapping
-    public ProductOutput getProductById(@Argument Long productId) {
-        return productService.getProductById(productId);
+    public ProductOutput getProductById(@Argument Long ProductId) {
+        ProductOutput productOutput = productService.getProductById(ProductId);
+        ProductImg productImg = productImgService.findByProductId(ProductId.toString());
+        return convertToProductOutputWithImage(productOutput, productImg);
     }
 
     @QueryMapping
     public List<ProductOutput> getAllProducts() {
-        System.out.println("getAllProducts called");
-        return productService.getAllProducts();
+        return productService.getAllProducts().stream()
+                .map(product -> {
+                    ProductImg productImg = productImgService.findByProductId(product.getProductId().toString());
+                    return convertToProductOutputWithImage(product, productImg);
+                })
+                .collect(Collectors.toList());
     }
+
     @QueryMapping
-    public List<ProductOutput> getProductsByTitle(@Argument String title) { return productService.findByTitle(title); }
+    public List<ProductOutput> getProductsByTitle(@Argument String title) {
+        return productService.findByTitle(title).stream()
+                .map(product -> {
+                    ProductImg productImg = productImgService.findByProductId(product.getProductId().toString());
+                    return convertToProductOutputWithImage(product, productImg);
+                })
+                .toList();
+    }
+
     @QueryMapping
-    public List<ProductOutput> getProductsByCategory(@Argument String category) { return productService.findByCategory(category); }
+    public List<ProductOutput> getProductsByCategory(@Argument String category) {
+        return productService.findByCategory(category).stream()
+                .map(product -> {
+                    ProductImg productImg = productImgService.findByProductId(product.getProductId().toString());
+                    return convertToProductOutputWithImage(product, productImg);
+                })
+                .collect(Collectors.toList());
+    }
+
+    private ProductOutput convertToProductOutputWithImage(ProductOutput product, ProductImg productImg) {
+        return new ProductOutput(
+                product.getProductId(),
+                product.getTitle(),
+                product.getCategory(),
+                product.getPlace(),
+                product.getDescription(),
+                product.getView_cnt(),
+                productImg.getProductImgUrl(),
+                product.getDateList(),
+                product.getDiscounts()
+        );
+    }
 }

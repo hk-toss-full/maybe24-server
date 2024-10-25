@@ -26,7 +26,7 @@ public class Review {
     @Column(nullable = false)
     private String author;
     private String content;
-    @CreatedDate() @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm") @Builder.Default
+    @CreatedDate @Builder.Default
     private LocalDateTime createdAt=LocalDateTime.now();
     private int rating;
     private Long productId;

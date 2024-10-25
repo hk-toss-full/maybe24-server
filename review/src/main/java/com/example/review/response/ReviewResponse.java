@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Builder
 public record ReviewResponse(
-        Long reviewId, String author, String content, LocalDateTime createAt ,int rating, Long productId) {
+        Long reviewId, String author, String content, LocalDateTime createAt , int rating, Long productId) {
 
     public static ReviewResponse from (Review review) {
         return new ReviewResponse(

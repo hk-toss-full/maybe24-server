@@ -1,6 +1,7 @@
 package com.example.review.controller;
 
 import com.example.review.domain.Review;
+import com.example.review.repository.ReviewRepository;
 import com.example.review.response.ReviewResponse;
 import com.example.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import java.util.List;
 public class ReviewController {
 
     private final ReviewService reviewService;
+   
 
     @GetMapping("/reviews")
     public List<ReviewResponse> getReviews() {

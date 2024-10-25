@@ -5,7 +5,9 @@ import com.example.review.response.ReviewResponse;
 import com.example.review.domain.Review;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +24,7 @@ public class ReviewServiceImpl implements ReviewService {
         return list;
     }
 
+    @Transactional
     @Override
     public ReviewResponse saveReviews(Review review) {
         Review save = reviewRepository.save(review);
@@ -43,6 +46,7 @@ public class ReviewServiceImpl implements ReviewService {
                     .content(review.getContent() == null ? existingReview.getContent() : review.getContent())
                     .author(review.getAuthor() == null ? existingReview.getAuthor() : review.getAuthor())
                     .rating(review.getRating() == null ? existingReview.getRating() : review.getRating())
+                    .productId(existingReview.getProductId())
                     .build();
 
             Review save = reviewRepository.save(updateReview);

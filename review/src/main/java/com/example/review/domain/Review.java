@@ -1,11 +1,13 @@
 package com.example.review.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -24,10 +26,9 @@ public class Review {
     @Column(nullable = false)
     private String author;
     private String content;
-    @CreatedDate
-    private LocalDateTime createdAt;
+    @CreatedDate() @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm") @Builder.Default
+    private LocalDateTime createdAt=LocalDateTime.now();
     @Enumerated(EnumType.STRING)
     private Rating rating;
-//    @ManyToOne
-//    private Product productId;
+    private Long productId;
 }

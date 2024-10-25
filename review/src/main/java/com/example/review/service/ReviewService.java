@@ -12,4 +12,5 @@ public interface ReviewService {
     ReviewResponse saveReviews(Review review);
     void deleteReviews(long reviewId);
     ReviewResponse updateReviews(long reviewId, Review review);
+    double averageRating(long productId);
 }

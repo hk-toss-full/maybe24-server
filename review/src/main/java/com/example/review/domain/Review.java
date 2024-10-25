@@ -28,7 +28,6 @@ public class Review {
     private String content;
     @CreatedDate() @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm") @Builder.Default
     private LocalDateTime createdAt=LocalDateTime.now();
-    @Enumerated(EnumType.STRING)
-    private Rating rating;
+    private int rating;
     private Long productId;
 }

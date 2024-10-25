@@ -14,11 +14,16 @@ import java.util.List;
 public class ReviewController {
 
     private final ReviewService reviewService;
-   
+
 
     @GetMapping("/reviews")
     public List<ReviewResponse> getReviews() {
         return reviewService.getAll();
+    }
+
+    @GetMapping("/reviews/{productId}/average-rating")
+    public double getAverageRating(@PathVariable Long productId) {
+        return reviewService.averageRating(productId);
     }
 
     @PostMapping("/reviews")

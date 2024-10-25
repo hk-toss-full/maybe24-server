@@ -45,7 +45,7 @@ public class ReviewServiceImpl implements ReviewService {
                     .reviewId(existingReview.getReviewId())
                     .content(review.getContent() == null ? existingReview.getContent() : review.getContent())
                     .author(review.getAuthor() == null ? existingReview.getAuthor() : review.getAuthor())
-                    .rating(review.getRating() == null ? existingReview.getRating() : review.getRating())
+                    .rating(review.getRating())
                     .productId(existingReview.getProductId())
                     .build();
 
@@ -55,5 +55,17 @@ public class ReviewServiceImpl implements ReviewService {
         }else{
             throw new RuntimeException("해당 리뷰를 찾을 수 없습니다.");
         }
+    }
+
+    @Override
+    public double averageRating(long productId) {
+        List<Review> reviews = reviewRepository.findByProductId(productId);
+        if (reviews.isEmpty()) {
+            return 0;
+        }else {
+            double totalRating = reviews.stream().mapToInt(Review::getRating).sum();
+            return totalRating/reviews.size();
+        }
+
     }
 }

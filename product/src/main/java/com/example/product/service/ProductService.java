@@ -13,8 +13,8 @@ import java.util.List;
 public class ProductService{
     private final ProductRepository productRepository;
 
-    public ProductOutput getProductById(Long id) {
-        Product product = productRepository.findById(id)
+    public ProductOutput getProductById(Long productId) {
+        Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
         return convertToProductOutput(product);
     }
@@ -47,8 +47,11 @@ public class ProductService{
                 product.getProductId(),
                 product.getTitle(),
                 product.getCategory(),
+                product.getPlace(),
                 product.getDescription(),
-                product.getView_cnt()
+                product.getView_cnt(),
+                product.getDateList(),
+                product.getDiscounts()
         );
     }
 }

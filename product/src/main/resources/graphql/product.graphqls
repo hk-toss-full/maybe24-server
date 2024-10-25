@@ -1,10 +1,10 @@
 type Query {
-    getProductById(id: ID!): ProductOutput
+    getProductById(productId: ID!): ProductOutput
     getAllProducts: [ProductOutput]
     getProductsByCategory(category: String!): [ProductOutput]
     getProductsByTitle(title: String!): [ProductOutput]
 
-    getDiscountById(id: ID!): DiscountOutput
+    getDiscountById(discountId: ID!): DiscountOutput
     getDiscountsByProductId(productId: ID!): [DiscountOutput]
 
     getRoundByProductId(productId: ID!): RoundOutput
@@ -14,6 +14,7 @@ type ProductOutput {
     productId: ID
     title: String
     category: String
+    place: String
     description: String
     view_cnt: Int
     dateList: [RoundOutput]
@@ -21,16 +22,16 @@ type ProductOutput {
 }
 
 type RoundOutput {
-    id: ID
+    roundId: ID
     date: String
     totalCnt: Int
     price: Int
-    product: ProductOutput
+    productId: ID
 }
 
 type DiscountOutput {
     discountId: ID
     discountType: String
     discountRate: Int
-    product: ProductOutput
+    productId: ID
 }

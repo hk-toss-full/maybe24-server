@@ -16,8 +16,8 @@ public class DiscountResolver {
     private final DiscountService discountService;
 
     @QueryMapping
-    public DiscountOutput getDiscountById(@Argument Long id){
-        return discountService.getDiscountById(id);
+    public DiscountOutput getDiscountById(@Argument Long discountId){
+        return discountService.getDiscountById(discountId);
     }
 
     @QueryMapping

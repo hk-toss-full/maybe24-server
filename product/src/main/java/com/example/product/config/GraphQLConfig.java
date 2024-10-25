@@ -21,7 +21,7 @@ public class GraphQLConfig {
     public RuntimeWiringConfigurer runtimeWiringConfigurer() {
         return wiringBuilder -> wiringBuilder.type("Query", builder -> builder
                 .dataFetcher("getProductById", env -> {
-                    Long id = env.getArgument("id");
+                    Long id = parseLongArgument(env.getArgument("productId"));
                     return productService.getProductById(id);
                 })
                 .dataFetcher("getAllProducts", env -> productService.getAllProducts())
@@ -34,20 +34,32 @@ public class GraphQLConfig {
                     return productService.findByCategory(category);
                 })
                 .dataFetcher("getDiscountById", env -> {
-                    Long id = env.getArgument("id");
+                    Long id = parseLongArgument(env.getArgument("discountId"));
                     return discountService.getDiscountById(id);
                 })
                 .dataFetcher("getDiscountsByProductId", env -> {
-                    Long productId = env.getArgument("productId");
+                    Long productId = parseLongArgument(env.getArgument("productId"));
                     return discountService.getDiscountByProductId(productId);
                 })
                 .dataFetcher("getRoundByProductId", env -> {
-                    Long productId = env.getArgument("productId");
+                    Long productId = parseLongArgument(env.getArgument("productId"));
                     return roundService.getRoundByProductId(productId);
-                }))
+                })
+                )
                 .type("ProductOutput", builder -> builder)
                 .type("DiscountOutput", builder -> builder)
                 .type("RoundOutput", builder -> builder);
+    }
+    private Long parseLongArgument(Object argument) {
+        if (argument instanceof Long) {
+            return (Long) argument;
+        } else if (argument instanceof Integer) {
+            return ((Integer) argument).longValue();
+        } else if (argument instanceof String) {
+            return Long.parseLong((String) argument);
+        } else {
+            throw new IllegalArgumentException("Invalid argument type: " + argument.getClass().getName());
+        }
     }
 }
 

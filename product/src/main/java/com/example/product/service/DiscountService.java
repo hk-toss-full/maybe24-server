@@ -14,14 +14,14 @@ public class DiscountService {
     private final DiscountRepository discountRepository;
 
     public List<DiscountOutput> getDiscountByProductId(Long productId) {
-        return discountRepository.findDiscountsByProductProductId(productId)
+        return discountRepository.findDiscountsByProduct_ProductId(productId)
                 .stream()
                 .map(this::convertToDiscountOutput)
                 .toList();
     }
 
-    public DiscountOutput getDiscountById(Long id) {
-        Discount discount = discountRepository.findById(id)
+    public DiscountOutput getDiscountById(Long discountId) {
+        Discount discount = discountRepository.findById(discountId)
                 .orElseThrow(() -> new RuntimeException("discount not found"));
         return convertToDiscountOutput(discount);
     }

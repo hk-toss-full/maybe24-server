@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 public class Product {
     @Id
-    @Column(name="PRODUCT_ID")
+    @Column(name="product_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;
 

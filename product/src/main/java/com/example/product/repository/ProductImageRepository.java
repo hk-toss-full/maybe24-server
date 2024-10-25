@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ProductImageRepository extends MongoRepository<ProductImage, String> {
-    List<ProductImage> findByProductId(String productId);
+    List<ProductImage> findByProductId(Long productId);
 }

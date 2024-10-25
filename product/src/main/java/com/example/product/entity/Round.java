@@ -18,7 +18,7 @@ public class Round {
     private int price;
 
     @ManyToOne
-    @JoinColumn(name="productId")
+    @JoinColumn(name="PRODUCT_ID")
     private Product product;
 
 }

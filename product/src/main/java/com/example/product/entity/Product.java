@@ -9,14 +9,15 @@ import java.util.List;
 @Entity
 public class Product {
     @Id
+    @Column(name="PRODUCT_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long productId;
+    private Long productId;
 
     private String category;
     private String title;
     private String description;
+    private String place;
     private int view_cnt;
-    private int price;
 
     @OneToMany(mappedBy = "product")
     private List<Round> dateList;

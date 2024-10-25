@@ -1,26 +1,36 @@
 type Query {
-    getProductById(id: ID!): Product
-    getAllProducts: [Product]
+    getProductById(id: ID!): ProductOutput
+    getAllProducts: [ProductOutput]
+    getProductsByCategory(category: String!): [ProductOutput]
+    getProductsByTitle(title: String!): [ProductOutput]
+
+    getDiscountById(id: ID!): DiscountOutput
+    getDiscountsByProductId(productId: ID!): [DiscountOutput]
+
+    getRoundByProductId(productId: ID!): RoundOutput
 }
 
-type Mutation {
-    createProduct(productInput: ProductInput): Product
-    updateProduct(id: ID!, productInput: ProductInput): Product
-    deleteProduct(id: ID!): Boolean
-}
-
-type Product {
+type ProductOutput {
     productId: ID
     title: String
     category: String
     description: String
     view_cnt: Int
-    rounds: [Round]
-    discounts: [Discount]
+    dateList: [RoundOutput]
+    discounts: [DiscountOutput]
 }
 
-input ProductInput {
-    title: String
-    category: String
-    description: String
+type RoundOutput {
+    id: ID
+    date: String
+    totalCnt: Int
+    price: Int
+    product: ProductOutput
+}
+
+type DiscountOutput {
+    discountId: ID
+    discountType: String
+    discountRate: Int
+    product: ProductOutput
 }

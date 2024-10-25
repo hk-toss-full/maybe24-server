@@ -12,5 +12,5 @@ public class ProductOutput {
     private String title;
     private String category;
     private String description;
-    private int price;
+    private int view_cnt;
 }

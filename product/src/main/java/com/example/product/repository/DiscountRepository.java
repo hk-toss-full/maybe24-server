@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface DiscountRepository extends JpaRepository<Discount,Long> {
-    List<Discount> findByProductId(Long productId);
+    List<Discount> findDiscountsByProductProductId(Long productId);
 }

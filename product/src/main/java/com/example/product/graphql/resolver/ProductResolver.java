@@ -2,23 +2,31 @@ package com.example.product.graphql.resolver;
 
 import com.example.product.graphql.dto.ProductOutput;
 import com.example.product.service.ProductService;
-import graphql.kickstart.tools.GraphQLMutationResolver;
-import graphql.kickstart.tools.GraphQLQueryResolver;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-@AllArgsConstructor
-public class ProductResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
+@RequiredArgsConstructor
+public class ProductResolver{
     private final ProductService productService;
 
-    public ProductOutput getProductById(Long id) {
-        return productService.findById(id);
+    @QueryMapping
+    public ProductOutput getProductById(@Argument Long id) {
+        return productService.getProductById(id);
     }
 
+    @QueryMapping
     public List<ProductOutput> getAllProducts() {
-        return productService.findAll();
+        System.out.println("getAllProducts called");
+        return productService.getAllProducts();
     }
+    @QueryMapping
+    public List<ProductOutput> getProductsByTitle(@Argument String title) { return productService.findByTitle(title); }
+    @QueryMapping
+    public List<ProductOutput> getProductsByCategory(@Argument String category) { return productService.findByCategory(category); }
 }

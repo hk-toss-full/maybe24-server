@@ -3,7 +3,6 @@ package com.example.product.service;
 import com.example.product.entity.Discount;
 import com.example.product.graphql.dto.DiscountOutput;
 import com.example.product.repository.DiscountRepository;
-import com.example.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +12,9 @@ import java.util.List;
 @Service
 public class DiscountService {
     private final DiscountRepository discountRepository;
-    private final ProductRepository productRepository;
 
-    public List<DiscountOutput> getAllDiscounts() {
-        return discountRepository.findAll()
+    public List<DiscountOutput> getDiscountByProductId(Long productId) {
+        return discountRepository.findDiscountsByProductProductId(productId)
                 .stream()
                 .map(this::convertToDiscountOutput)
                 .toList();

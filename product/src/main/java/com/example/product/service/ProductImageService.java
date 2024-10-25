@@ -16,7 +16,7 @@ public class ProductImageService {
         this.productImageRepository = productImageRepository;
     }
 
-    public List<ProductImage> getProductImages(String productId) {
+    public List<ProductImage> getProductImages(Long productId) {
         return productImageRepository.findByProductId(productId);
     }
 }

@@ -7,12 +7,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @AllArgsConstructor
 @Getter
-@Document(collection = "product_images")
+@Document(collection = "productImg")
 public class ProductImage {
     @Id
     private String id;
-
-    private String productId;
+    private Long productId;
     private String imageUrl;
 }
 

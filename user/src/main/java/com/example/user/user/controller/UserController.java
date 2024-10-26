@@ -28,5 +28,4 @@ public class UserController {
         System.out.println(request.userId());
         return userServiceImpl.checkDup(request.userId());
     }
-
 }

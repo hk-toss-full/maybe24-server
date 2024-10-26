@@ -16,3 +16,9 @@ spring:
 jwt:
   secret: rlaguswjdtlstkskdnslRKdkswdkdlTdj
   expiration: 31536000000
+
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE

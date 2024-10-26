@@ -1,16 +1,15 @@
 package com.example.user.user.entity;
 
+import com.example.user.account.entity.Account;
+import com.example.user.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.GrantedAuthority;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -22,7 +21,7 @@ import java.util.List;
 @Table(
         name = "USER"
 )
-public class User implements UserDetails{
+public class User extends BaseEntity implements UserDetails{
     @Id
     private String userId;
     @Column(nullable=false)
@@ -34,10 +33,9 @@ public class User implements UserDetails{
     @Column(nullable=false)
     private String address;
 
-    @CreatedDate
-    private LocalDateTime createdAt;
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
+    @OneToOne(cascade = CascadeType.ALL)
+    private final Account account = new Account(this);
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities(){
@@ -46,7 +44,7 @@ public class User implements UserDetails{
 
     @Override
     public String getUsername() {
-        return nickname;
+        return userId;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.user.user.service;
 
+import com.example.user.account.entity.Account;
 import com.example.user.user.dto.LoginRequest;
 import com.example.user.user.dto.RegisterRequest;
 import com.example.user.user.entity.User;
@@ -20,7 +21,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String login(LoginRequest loginRequest) {
-        Optional<User> loginUser = userRepository.findUserByUserId(loginRequest.userId());
+        Optional<User> loginUser = userRepository.findUserByUserId(loginRequest.userId().toString());
         if(loginUser.isEmpty())
             throw new RuntimeException("해당 아이디를 가진 사용자가 없습니다");
         User user = loginUser.get();

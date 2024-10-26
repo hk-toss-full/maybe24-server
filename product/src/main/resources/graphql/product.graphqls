@@ -13,7 +13,7 @@ type Query {
 type ProductOutput {
     productId: ID
     title: String
-    category: String
+    category: Category
     place: String
     description: String
     view_cnt: Int
@@ -38,7 +38,22 @@ type RoundOutput {
 
 type DiscountOutput {
     discountId: ID
-    discountType: String
+    discountType: DiscountType
     discountRate: Int
     productId: ID
+}
+
+enum Category{
+    CONCERT
+    MUSICAL
+    THEATER
+    CLASSIC
+    EXHIBITION
+    KIDS
+}
+
+enum DiscountType{
+    TEENAGER
+    NATIONAL
+    CULTURE
 }

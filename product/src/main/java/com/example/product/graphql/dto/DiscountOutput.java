@@ -1,6 +1,7 @@
 package com.example.product.graphql.dto;
 
 
+import com.example.product.enums.DiscountType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class DiscountOutput {
     private Long discountId;
-    private String discountType;
+    private DiscountType discountType;
     private int discountRate;
     private Long productId;
 }

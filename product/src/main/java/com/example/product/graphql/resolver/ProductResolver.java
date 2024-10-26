@@ -10,7 +10,6 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -19,9 +18,9 @@ public class ProductResolver {
     private final ProductImgService productImgService;
 
     @QueryMapping
-    public ProductOutput getProductById(@Argument Long ProductId) {
-        ProductOutput productOutput = productService.getProductById(ProductId);
-        ProductImg productImg = productImgService.findByProductId(ProductId.toString());
+    public ProductOutput getProductById(@Argument Long productId) {
+        ProductOutput productOutput = productService.getProductById(productId);
+        ProductImg productImg = productImgService.findByProductId(productId.toString());
         return convertToProductOutputWithImage(productOutput, productImg);
     }
 
@@ -32,7 +31,7 @@ public class ProductResolver {
                     ProductImg productImg = productImgService.findByProductId(product.getProductId().toString());
                     return convertToProductOutputWithImage(product, productImg);
                 })
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @QueryMapping
@@ -52,7 +51,7 @@ public class ProductResolver {
                     ProductImg productImg = productImgService.findByProductId(product.getProductId().toString());
                     return convertToProductOutputWithImage(product, productImg);
                 })
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private ProductOutput convertToProductOutputWithImage(ProductOutput product, ProductImg productImg) {

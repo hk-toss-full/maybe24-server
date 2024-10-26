@@ -1,5 +1,6 @@
 package com.example.product.entity;
 
+import com.example.product.enums.DiscountType;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -10,7 +11,8 @@ public class Discount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long discountId;
 
-    private String discountType;
+    @Enumerated(EnumType.STRING)
+    private DiscountType discountType;
     private int discountRate;
 
     @ManyToOne

@@ -1,5 +1,6 @@
 package com.example.product.entity;
 
+import com.example.product.enums.Category;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -13,7 +14,8 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;
 
-    private String category;
+    @Enumerated(EnumType.STRING)
+    private Category category;
     private String title;
     private String description;
     private String place;

@@ -1,7 +1,6 @@
 package com.example.review.controller;
 
 import com.example.review.domain.Review;
-import com.example.review.repository.ReviewRepository;
 import com.example.review.response.ReviewResponse;
 import com.example.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +23,11 @@ public class ReviewController {
     @GetMapping("/reviews/{productId}/average-rating")
     public double getAverageRating(@PathVariable Long productId) {
         return reviewService.averageRating(productId);
+    }
+
+    @GetMapping("product/reviews/{productId}")
+    public List<ReviewResponse> getReviewsByProductId(@PathVariable Long productId) {
+        return reviewService.getReviewsByProductId(productId);
     }
 
     @PostMapping("/reviews")

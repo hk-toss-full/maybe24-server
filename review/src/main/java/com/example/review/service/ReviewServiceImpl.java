@@ -32,6 +32,13 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    public List<ReviewResponse> getReviewsByProductId(Long productId) {
+        List<Review> reviewList = reviewRepository.findByProductId(productId);
+        List<ReviewResponse> list = reviewList.stream().map(ReviewResponse::from).toList();
+        return list;
+    }
+
+    @Override
     public void deleteReviews(long id) {
         reviewRepository.deleteById(id);
     }

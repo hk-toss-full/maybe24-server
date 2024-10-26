@@ -10,6 +10,7 @@ import java.util.List;
 public interface ReviewService {
     List<ReviewResponse> getAll();
     ReviewResponse saveReviews(Review review);
+    List<ReviewResponse> getReviewsByProductId(Long productId);
     void deleteReviews(long reviewId);
     ReviewResponse updateReviews(long reviewId, Review review);
     double averageRating(long productId);

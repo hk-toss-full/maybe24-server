@@ -2,7 +2,6 @@ package com.example.user.account.controller;
 
 import com.example.user.account.dto.AccountResponse;
 import com.example.user.account.dto.TransactionRequest;
-import com.example.user.account.entity.Account;
 import com.example.user.account.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -16,17 +15,19 @@ public class AccountController {
     @GetMapping
     public AccountResponse getAccount(Authentication authentication) {
         String userId = authentication.getName();
-        System.out.println("getAccount, userId: "+userId);
         return AccountResponse.from(accountService.getMyAccount(userId));
     }
 
     @PostMapping("/save")
-   public Account saveAccount(Authentication authentication, @RequestBody TransactionRequest request) {
-        return accountService.deposit(authentication.getName(), request);
+    public AccountResponse saveAccount(Authentication authentication, @RequestBody TransactionRequest request) {
+        System.out.println(request);
+        String userId = authentication.getName();
+        return AccountResponse.from(accountService.deposit(userId, request));
     }
 
     @PostMapping("/pay")
-    public Account payAccount(Authentication authentication, @RequestBody TransactionRequest request) {
-        return accountService.withdrawal(authentication.getName(), request);
+    public AccountResponse payAccount(Authentication authentication, @RequestBody TransactionRequest request) {
+        String userId = authentication.getName();
+        return AccountResponse.from(accountService.withdrawal(userId, request));
     }
 }

@@ -21,11 +21,11 @@ public class Account {
     private User user;
 
     public Account(User user) {
-        this.balance = 0L;
+        this.balance = 1_000_000L;
         this.user = user;
     }
 
     public void changeBalance(int amount) {
-        this.balance += balance;
+        this.balance += amount;
     };
 }

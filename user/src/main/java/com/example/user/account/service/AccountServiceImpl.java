@@ -25,9 +25,10 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account deposit(String userId, TransactionRequest request){
-        Account account = getMyAccount(userId);
+    public Account deposit(String accountId, TransactionRequest request){
+        Account account = getMyAccount(accountId);
         account.changeBalance(request.amount());
+        accountRepository.save(account);
         return account;
     };
 
@@ -36,6 +37,7 @@ public class AccountServiceImpl implements AccountService {
         Account account = getMyAccount(userId);
         if(account.getBalance() < request.amount()) throw new RuntimeException("Account balance not enough");
         account.changeBalance(-request.amount());
+        accountRepository.save(account);
         return account;
     };
 //    List<Pay> getAllPayments(){};

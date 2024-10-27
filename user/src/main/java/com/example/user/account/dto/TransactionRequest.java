@@ -1,10 +1,10 @@
 package com.example.user.account.dto;
 
 public record TransactionRequest(
-        Long id,
+        String userId,
         int amount
 ){
-    public TransactionRequest toEntity(Long id, int amount){
-        return new TransactionRequest(id, amount);
+    public TransactionRequest toEntity(String userId, int amount){
+        return new TransactionRequest(userId, amount);
     }
 }

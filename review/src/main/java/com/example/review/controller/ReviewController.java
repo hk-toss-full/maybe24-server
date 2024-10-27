@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
 public class ReviewController {
 
@@ -20,12 +21,12 @@ public class ReviewController {
         return reviewService.getAll();
     }
 
-    @GetMapping("/reviews/{productId}/average-rating")
+    @GetMapping("/{productId}/reviews/average-rating")
     public double getAverageRating(@PathVariable Long productId) {
         return reviewService.averageRating(productId);
     }
 
-    @GetMapping("product/reviews/{productId}")
+    @GetMapping("/{productId}/reviews")
     public List<ReviewResponse> getReviewsByProductId(@PathVariable Long productId) {
         return reviewService.getReviewsByProductId(productId);
     }

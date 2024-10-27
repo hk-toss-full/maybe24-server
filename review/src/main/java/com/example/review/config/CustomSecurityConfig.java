@@ -33,7 +33,7 @@ public class CustomSecurityConfig {
                                 "/api/v1/auth/login",
                                 "/reviews",
                                 "/reviews/{id}",
-                                "product/reviews/{productId}",
+                                "/{productId}/reviews",
                                 "/reviews/{productId}/average-rating",
                                 "/api/v1/auth/register"
                         )

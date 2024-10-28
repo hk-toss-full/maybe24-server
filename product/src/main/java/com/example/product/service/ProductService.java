@@ -2,7 +2,6 @@ package com.example.product.service;
 
 import com.example.product.entity.Product;
 import com.example.product.enums.Category;
-import com.example.product.graphql.dto.ProductImgOutput;
 import com.example.product.graphql.dto.ProductOutput;
 import com.example.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;

@@ -13,11 +13,3 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/productImg?authSource=admin
-
-logging:
-    file:
-      name: logs/spring.log
-    level:
-      root: INFO
-      org.springframework.web: DEBUG
-      graphql: DEBUG

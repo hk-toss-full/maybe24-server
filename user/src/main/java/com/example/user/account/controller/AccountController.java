@@ -3,11 +3,9 @@ package com.example.user.account.controller;
 import com.example.user.account.dto.AccountResponse;
 import com.example.user.account.dto.TransactionRequest;
 import com.example.user.account.service.AccountService;
-import com.example.user.global.CustomException;
 import com.example.user.global.Message;
 import com.example.user.global.StatusEnum;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -20,15 +18,8 @@ public class AccountController {
     @GetMapping
     public ResponseEntity<Message> getAccount(Authentication authentication) {
         String userId = authentication.getName();
-
-        try{
             AccountResponse accountResponse = AccountResponse.from(accountService.getMyAccount(userId));
             return ResponseEntity.ok(Message.builder().code(200).status(StatusEnum.OK).message("성공").data(accountResponse).build());
-
-        }catch(CustomException e){
-            return new ResponseEntity(Message.builder().code(e.getCode()).status(StatusEnum.of(e.getCode())).message(e.getMessage()).build(), HttpStatusCode.valueOf(e.getCode()));
-
-        }
 
 
 
@@ -37,8 +28,6 @@ public class AccountController {
     @PostMapping
     public ResponseEntity<Message> saveAccount(Authentication authentication, @RequestBody TransactionRequest request) {
         String userId = authentication.getName();
-
-        try{
             AccountResponse accountResponse = AccountResponse.from(accountService.deposit(userId, request));
             return ResponseEntity.ok(Message
                     .builder()
@@ -47,24 +36,13 @@ public class AccountController {
                     .status(StatusEnum.OK)
                     .data(accountResponse)
                     .build());
-        }
-        catch(CustomException e){
-            return new ResponseEntity<>(
-                    Message
-                            .builder()
-                            .code(e.getCode())
-                            .status(StatusEnum.of(e.getCode()))
-                            .message(e.getMessage()).
-                            build()
-                    , HttpStatusCode.valueOf(e.getCode()));
-        }
+
     }
 
     @PostMapping("/pay")
     public ResponseEntity<Message> payAccount(Authentication authentication, @RequestBody TransactionRequest request) {
         String userId = authentication.getName();
 
-        try{
             AccountResponse accountResponse = AccountResponse.from(accountService.withdrawal(userId, request));
             return ResponseEntity.ok(Message
                     .builder()
@@ -73,14 +51,6 @@ public class AccountController {
                     .status(StatusEnum.OK)
                     .data(accountResponse)
                     .build());
-        }catch(CustomException e){
-            return new ResponseEntity<>(
-                    Message
-                            .builder()
-                            .code(e.getCode())
-                            .status(StatusEnum.of(e.getCode()))
-                            .message(e.getMessage()).build()
-                    , HttpStatusCode.valueOf(e.getCode()));
-        }
+
     }
 }

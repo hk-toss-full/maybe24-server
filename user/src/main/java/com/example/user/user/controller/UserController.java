@@ -1,6 +1,7 @@
 package com.example.user.user.controller;
 
 import com.example.user.account.dto.TokenResponse;
+import com.example.user.global.CustomException;
 import com.example.user.global.Message;
 import com.example.user.global.StatusEnum;
 import com.example.user.user.dto.CheckDupRequest;
@@ -35,8 +36,11 @@ public class UserController {
 
     @PostMapping("/check-dup")
     public ResponseEntity<Message> checkDup(@RequestBody CheckDupRequest request) {
-    userServiceImpl.checkDup(request.userId());
-            return ResponseEntity.ok(Message.builder().code(200).status(StatusEnum.OK).message("사용 가능한 아이디 입니다").build());
-
+            Boolean isAvailable = userServiceImpl.checkDup(request.userId());
+            if(isAvailable){
+                return ResponseEntity.ok(Message.builder().code(200).status(StatusEnum.OK).data(isAvailable).message("사용 가능한 아이디 입니다").build());
+            }else{
+                throw new CustomException(409, "사용 불가한 아이디입니다");
+            }
     }
 }

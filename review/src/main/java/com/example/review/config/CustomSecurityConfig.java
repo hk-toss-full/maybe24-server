@@ -33,8 +33,8 @@ public class CustomSecurityConfig {
                                 "/api/v1/auth/login",
                                 "/reviews",
                                 "/reviews/{id}",
-                                "/{productId}/reviews",
-                                "/reviews/{productId}/average-rating",
+                                "/reviews/{productId}",
+                                "/reviews/average-rating/{productId}",
                                 "/api/v1/auth/register"
                         )
                         .permitAll()

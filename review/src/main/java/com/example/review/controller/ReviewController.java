@@ -21,17 +21,17 @@ public class ReviewController {
         return reviewService.getAll();
     }
 
-    @GetMapping("/{productId}/reviews/average-rating")
+    @GetMapping("/reviews/average-rating/{productId}")
     public double getAverageRating(@PathVariable Long productId) {
         return reviewService.averageRating(productId);
     }
 
-    @GetMapping("/{productId}/reviews")
+    @GetMapping("/reviews/{productId}")
     public List<ReviewResponse> getReviewsByProductId(@PathVariable Long productId) {
         return reviewService.getReviewsByProductId(productId);
     }
 
-    @PostMapping("/reviews")
+    @PostMapping("/reviews/{productId}")
     public ReviewResponse addReview(@RequestBody Review review) {
         return reviewService.saveReviews(review);
     }

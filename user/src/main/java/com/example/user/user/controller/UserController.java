@@ -7,6 +7,8 @@ import com.example.user.user.service.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import static java.rmi.server.LogStream.log;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/auth")
@@ -25,7 +27,7 @@ public class UserController {
 
     @PostMapping("/check-dup")
     public Boolean checkDup(@RequestBody CheckDupRequest request) {
-        System.out.println(request.userId());
+        log(request.userId());
         return userServiceImpl.checkDup(request.userId());
     }
 }

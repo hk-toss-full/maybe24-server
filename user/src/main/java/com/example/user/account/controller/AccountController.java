@@ -34,7 +34,7 @@ public class AccountController {
 
     }
 
-    @PostMapping("/save")
+    @PostMapping
     public ResponseEntity<Message> saveAccount(Authentication authentication, @RequestBody TransactionRequest request) {
         String userId = authentication.getName();
 

@@ -18,8 +18,7 @@ public class CustomSecurityConfig {
     private final UserDetailsServiceImpl userService;
     private final JwtFilter jwtFilter;
     @Bean
-    public SecurityFilterChain
-    securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain  securityFilterChain(HttpSecurity http) throws Exception {
         http.formLogin(AbstractHttpConfigurer::disable);
         http.csrf(AbstractHttpConfigurer::disable);
         http.userDetailsService(userService);

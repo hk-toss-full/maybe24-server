@@ -20,7 +20,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Account getMyAccount(String userId) {
         User user = userRepository.findById(userId).orElseThrow();
-        Optional<Account> account = accountRepository.findAccountByUser(user);
+        Optional<Account> account = accountRepository.findByUser(user);
         if (account.isEmpty()) throw new CustomException(404, "존재하지 않는 계좌입니다");
         return account.get();
     }
@@ -28,6 +28,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Account deposit(String accountId, TransactionRequest request){
         Account account = getMyAccount(accountId);
+
         account.changeBalance(request.amount());
         accountRepository.save(account);
         return account;

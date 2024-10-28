@@ -7,6 +7,7 @@ import com.example.product.graphql.dto.ProductOutput;
 import com.example.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,9 +17,12 @@ public class ProductService{
     private final ProductRepository productRepository;
     private final ProductImgService productImgService;
 
+    @Transactional
     public ProductOutput getProductById(Long productId) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
+        product.increaseViewCnt();
+        productRepository.save(product);
         return convertToProductOutput(product);
     }
 
@@ -60,6 +64,14 @@ public class ProductService{
                 product.getDiscounts()
         );
     }
+
+//    @Transactional
+//    public void increaseViewCnt(Long productId) {
+//        Product product = productRepository.findById(productId)
+//                .orElseThrow(() -> new RuntimeException("Product not found"));
+//        product.increaseViewCnt();
+//        productRepository.save(product);
+//    }
 
     private ProductImgOutput convertToProductImgOutput(ProductImg productImg) {
         return new ProductImgOutput(

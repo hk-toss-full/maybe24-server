@@ -26,4 +26,8 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     private List<Discount> discounts;
+
+    public void increaseViewCnt() {
+        this.view_cnt++;
+    }
 }

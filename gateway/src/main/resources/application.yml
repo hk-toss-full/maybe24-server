@@ -6,7 +6,7 @@ spring:
       routes:
         # example
         - id: user-service
-          uri: lb://USER-SERVICE
+          uri: lb://USER
           predicates:
             - Path=/auth/**
         # add your service

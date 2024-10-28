@@ -28,10 +28,9 @@ public class ProductService{
     }
 
     public List<ProductOutput> getAllProducts() {
-        List<ProductOutput> list = productRepository.findAll().stream()
+        return productRepository.findAll().stream()
                 .map(el->convertToProductOutput(el, productImgService))
                 .toList();
-        return list;
     }
 
     public List<ProductOutput> findByCategory(Category category) {
@@ -48,5 +47,21 @@ public class ProductService{
                 .map(el->convertToProductOutput(el, productImgService))
                 .toList();
     }
+
+    public List<ProductOutput> findTop3ByCategoryOrderByViewCntDesc(Category category){
+        return productRepository.findTop3ByCategoryOrderByViewCntDesc(category)
+                .stream()
+                .map(el -> convertToProductOutput(el, productImgService))
+                .toList();
+    }
+
+    public List<ProductOutput> findTop7ByOrderByViewCntDesc(){
+        return productRepository.findTop7ByOrderByViewCntDesc()
+                .stream()
+                .map(el -> convertToProductOutput(el, productImgService))
+                .toList();
+    }
+
+
 }
 

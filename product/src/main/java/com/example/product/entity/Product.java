@@ -20,7 +20,7 @@ public class Product {
     private String title;
     private String description;
     private String place;
-    private int view_cnt;
+    private int viewCnt;
 
     @OneToMany(mappedBy = "product")
     private List<Round> dateList;
@@ -29,6 +29,6 @@ public class Product {
     private List<Discount> discounts;
 
     public void increaseViewCnt() {
-        this.view_cnt++;
+        this.viewCnt++;
     }
 }

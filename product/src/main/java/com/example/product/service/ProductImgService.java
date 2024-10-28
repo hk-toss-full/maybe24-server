@@ -13,7 +13,6 @@ public class ProductImgService {
     private final ProductImgRepository productImgRepository;
 
     public ProductImg findByProductId(String productId) {
-        System.out.println("productID = " + productId);
         return productImgRepository.findByProductId(productId);
     }
 }

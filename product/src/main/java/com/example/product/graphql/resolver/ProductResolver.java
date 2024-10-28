@@ -17,6 +17,7 @@ import static com.example.product.graphql.dto.ProductOutput.convertToProductOutp
 @Component
 @RequiredArgsConstructor
 public class ProductResolver {
+
     private final ProductService productService;
     private final ProductImgService productImgService;
 
@@ -51,6 +52,26 @@ public class ProductResolver {
     public List<ProductOutput> getProductsByCategory(@Argument Category category) {
         return productService.findByCategory(category).stream()
                 .map(product -> {
+                    ProductImg productImg = productImgService.findByProductId(product.getProductId().toString());
+                    return convertToProductOutputWithImage(product, productImg);
+                })
+                .toList();
+    }
+
+    @QueryMapping
+    public List<ProductOutput> getTop3ByCategoryOrderByViewCnt(@Argument Category category) {
+        return productService.findTop3ByCategoryOrderByViewCntDesc(category).stream()
+                .map(product ->{
+                    ProductImg productImg = productImgService.findByProductId(product.getProductId().toString());
+                    return convertToProductOutputWithImage(product, productImg);
+                })
+                .toList();
+    }
+
+    @QueryMapping
+    public List<ProductOutput> getTop7ByOrderByViewCntDesc(){
+        return productService.findTop7ByOrderByViewCntDesc().stream()
+                .map(product ->{
                     ProductImg productImg = productImgService.findByProductId(product.getProductId().toString());
                     return convertToProductOutputWithImage(product, productImg);
                 })

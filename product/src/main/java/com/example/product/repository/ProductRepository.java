@@ -11,4 +11,6 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByCategory(Category category);
     List<Product> findByTitleContaining(String title);
+    List<Product> findTop3ByCategoryOrderByViewCntDesc(Category category);
+    List<Product> findTop7ByOrderByViewCntDesc();
 }

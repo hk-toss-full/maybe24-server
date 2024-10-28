@@ -24,6 +24,7 @@ public class GraphQLConfig {
                             return productService.getProductById(id);
                         })
                         .dataFetcher("getAllProducts", env -> productService.getAllProducts())
+                        .dataFetcher("getTop7ByOrderByViewCntDesc", env->productService.findTop7ByOrderByViewCntDesc())
                         .dataFetcher("getProductsByTitle", env -> {
                             String title = env.getArgument("title");
                             return productService.findByTitle(title);
@@ -44,6 +45,11 @@ public class GraphQLConfig {
                         .dataFetcher("getRoundByProductId", env -> {
                             Long productId = parseLongArgument(env.getArgument("productId"));
                             return roundService.getRoundByProductId(productId);
+                        })
+                        .dataFetcher("getTop3ByCategoryOrderByViewCnt", env ->{
+                            String categoryString = env.getArgument("category");
+                            Category category = Category.valueOf(categoryString.toUpperCase());
+                            return productService.findTop3ByCategoryOrderByViewCntDesc(category);
                         })
                 )
                 .type("ProductOutput", builder -> builder)

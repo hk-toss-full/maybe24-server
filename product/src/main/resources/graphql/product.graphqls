@@ -8,6 +8,9 @@ type Query {
     getDiscountsByProductId(productId: ID!): [DiscountOutput]
 
     getRoundByProductId(productId: ID!): RoundOutput
+
+    getTop3ByCategoryOrderByViewCnt(category: Category!): [ProductOutput]
+    getTop7ByOrderByViewCntDesc: [ProductOutput]
 }
 
 type ProductOutput {
@@ -16,7 +19,7 @@ type ProductOutput {
     category: Category
     place: String
     description: String
-    view_cnt: Int
+    viewCnt: Int
     productImgUrl: String
     dateList: [RoundOutput]
     discounts: [DiscountOutput]

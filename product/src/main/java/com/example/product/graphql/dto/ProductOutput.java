@@ -22,7 +22,7 @@ public class ProductOutput {
     private Category category;
     private String place;
     private String description;
-    private int view_cnt;
+    private int viewCnt;
     private String productImgUrl;
     private List<Round> dateList;
     private List<Discount> discounts;
@@ -37,7 +37,7 @@ public class ProductOutput {
                 product.getCategory(),
                 product.getPlace(),
                 product.getDescription(),
-                product.getView_cnt(),
+                product.getViewCnt(),
                 productImg.getProductImgUrl(),
                 product.getDateList(),
                 product.getDiscounts()
@@ -59,7 +59,7 @@ public class ProductOutput {
                 product.getCategory(),
                 product.getPlace(),
                 product.getDescription(),
-                product.getView_cnt(),
+                product.getViewCnt(),
                 productImg.getProductImgUrl(),
                 product.getDateList(),
                 product.getDiscounts()

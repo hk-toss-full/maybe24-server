@@ -23,4 +23,5 @@ public class DiscountResolver {
     public List<DiscountOutput> getDiscountsByProductId(@Argument Long productId){
         return discountService.getDiscountByProductId(productId);
     }
+
 }

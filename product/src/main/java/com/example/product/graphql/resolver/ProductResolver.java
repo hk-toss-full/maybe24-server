@@ -1,6 +1,7 @@
 package com.example.product.graphql.resolver;
 
 import com.example.product.entity.ProductImg;
+import com.example.product.enums.Category;
 import com.example.product.graphql.dto.ProductOutput;
 import com.example.product.service.ProductImgService;
 import com.example.product.service.ProductService;
@@ -45,7 +46,7 @@ public class ProductResolver {
     }
 
     @QueryMapping
-    public List<ProductOutput> getProductsByCategory(@Argument String category) {
+    public List<ProductOutput> getProductsByCategory(@Argument Category category) {
         return productService.findByCategory(category).stream()
                 .map(product -> {
                     ProductImg productImg = productImgService.findByProductId(product.getProductId().toString());

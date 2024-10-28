@@ -1,7 +1,7 @@
 type Query {
     getProductById(productId: ID!): ProductOutput
     getAllProducts: [ProductOutput]
-    getProductsByCategory(category: String!): [ProductOutput]
+    getProductsByCategory(category: Category!): [ProductOutput]
     getProductsByTitle(title: String!): [ProductOutput]
 
     getDiscountById(discountId: ID!): DiscountOutput

@@ -2,6 +2,7 @@ package com.example.product.service;
 
 import com.example.product.entity.Product;
 import com.example.product.entity.ProductImg;
+import com.example.product.enums.Category;
 import com.example.product.graphql.dto.ProductImgOutput;
 import com.example.product.graphql.dto.ProductOutput;
 import com.example.product.repository.ProductRepository;
@@ -33,7 +34,7 @@ public class ProductService{
         return list;
     }
 
-    public List<ProductOutput> findByCategory(String category) {
+    public List<ProductOutput> findByCategory(Category category) {
         return productRepository.findByCategory(category)
                 .stream()
                 .map(this::convertToProductOutput)

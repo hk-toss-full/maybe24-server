@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+import static com.example.product.graphql.dto.ProductOutput.convertToProductOutputWithImage;
+
 @Component
 @RequiredArgsConstructor
 public class ProductResolver {
@@ -55,17 +57,4 @@ public class ProductResolver {
                 .toList();
     }
 
-    private ProductOutput convertToProductOutputWithImage(ProductOutput product, ProductImg productImg) {
-        return new ProductOutput(
-                product.getProductId(),
-                product.getTitle(),
-                product.getCategory(),
-                product.getPlace(),
-                product.getDescription(),
-                product.getView_cnt(),
-                productImg.getProductImgUrl(),
-                product.getDateList(),
-                product.getDiscounts()
-        );
-    }
 }

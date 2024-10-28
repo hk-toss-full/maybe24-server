@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.example.product.entity.Discount.convertToDiscountOutput;
+
 @RequiredArgsConstructor
 @Service
 public class DiscountService {
@@ -16,7 +18,7 @@ public class DiscountService {
     public List<DiscountOutput> getDiscountByProductId(Long productId) {
         return discountRepository.findDiscountsByProduct_ProductId(productId)
                 .stream()
-                .map(this::convertToDiscountOutput)
+                .map(Discount::convertToDiscountOutput)
                 .toList();
     }
 
@@ -24,14 +26,5 @@ public class DiscountService {
         Discount discount = discountRepository.findById(discountId)
                 .orElseThrow(() -> new RuntimeException("discount not found"));
         return convertToDiscountOutput(discount);
-    }
-
-    private DiscountOutput convertToDiscountOutput(Discount discount) {
-        return new DiscountOutput(
-                discount.getDiscountId(),
-                discount.getDiscountType(),
-                discount.getDiscountRate(),
-                discount.getProduct().getProductId()
-        );
     }
 }

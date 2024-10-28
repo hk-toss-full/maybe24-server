@@ -6,6 +6,8 @@ import com.example.product.repository.RoundRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import static com.example.product.graphql.dto.RoundOutput.convertToRoundOutput;
+
 @RequiredArgsConstructor
 @Service
 public class RoundService {
@@ -16,13 +18,4 @@ public class RoundService {
         return convertToRoundOutput(round);
     }
 
-    private RoundOutput convertToRoundOutput(Round round){
-        return new RoundOutput(
-                round.getRoundId(),
-                round.getDate(),
-                round.getPrice(),
-                round.getTotalCnt(),
-                round.getProduct().getProductId()
-        );
-    }
 }

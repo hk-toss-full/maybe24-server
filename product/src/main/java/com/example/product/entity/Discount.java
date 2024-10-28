@@ -1,6 +1,7 @@
 package com.example.product.entity;
 
 import com.example.product.enums.DiscountType;
+import com.example.product.graphql.dto.DiscountOutput;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -18,4 +19,13 @@ public class Discount {
     @ManyToOne
     @JoinColumn(name="product_id")
     private Product product;
+
+    public static DiscountOutput convertToDiscountOutput(Discount discount) {
+        return new DiscountOutput(
+                discount.getDiscountId(),
+                discount.getDiscountType(),
+                discount.getDiscountRate(),
+                discount.getProduct().getProductId()
+        );
+    }
 }

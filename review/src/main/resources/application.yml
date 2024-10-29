@@ -1,0 +1,22 @@
+spring:
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    config:
+      name: jwt
+      profile: default
+  application:
+    name: review
+  datasource:
+    url: jdbc:mysql://localhost:3306/review?serverTimezone=Asia/Seoul
+    username: test
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+server:
+  port: 8083
+jwt:
+  secret: asdfaerrwesdfserw2asdfaerrwesdfserw2321
+  expiration: 86400000

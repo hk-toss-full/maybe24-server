@@ -1,0 +1,62 @@
+type Query {
+    getProductById(productId: ID!): ProductOutput
+    getAllProducts: [ProductOutput]
+    getProductsByCategory(category: Category!): [ProductOutput]
+    getProductsByTitle(title: String!): [ProductOutput]
+
+    getDiscountById(discountId: ID!): DiscountOutput
+    getDiscountsByProductId(productId: ID!): [DiscountOutput]
+
+    getRoundByProductId(productId: ID!): RoundOutput
+
+    getTop3ByCategoryOrderByViewCnt(category: Category!): [ProductOutput]
+    getTop7ByOrderByViewCntDesc: [ProductOutput]
+}
+
+type ProductOutput {
+    productId: ID
+    title: String
+    category: Category
+    place: String
+    description: String
+    viewCnt: Int
+    productImgUrl: String
+    dateList: [RoundOutput]
+    discounts: [DiscountOutput]
+}
+
+type ProductImgOutput {
+    productImgId: ID
+    imageUrl: String
+    productId: ID
+}
+
+type RoundOutput {
+    roundId: ID
+    date: String
+    totalCnt: Int
+    price: Int
+    productId: ID
+}
+
+type DiscountOutput {
+    discountId: ID
+    discountType: DiscountType
+    discountRate: Int
+    productId: ID
+}
+
+enum Category{
+    CONCERT
+    MUSICAL
+    THEATER
+    CLASSIC
+    EXHIBITION
+    KIDS
+}
+
+enum DiscountType{
+    TEENAGER
+    NATIONAL
+    CULTURE
+}

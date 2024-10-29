@@ -16,12 +16,17 @@ spring:
           uri: lb://REVIEW
           predicates:
             - Path=/reviews/**
-
+        # example
+        - id: user-service
+          uri: lb://USER
+          predicates:
+            - Path=/auth/**
         - id: product-service
           uri: lb://PRODUCT
           predicates:
-              - Path=/product/**
-              - Method=POST, OPTIONS
+            - Path=/product/**
+            - Method=POST, OPTIONS
+        # add your service
 eureka:
   client:
     service-url:

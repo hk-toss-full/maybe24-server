@@ -16,7 +16,7 @@ spring:
       ddl-auto: none
     show-sql: true
 server:
-  port: 9000
+  port: 8083
 jwt:
   secret: asdfaerrwesdfserw2asdfaerrwesdfserw2321
   expiration: 86400000

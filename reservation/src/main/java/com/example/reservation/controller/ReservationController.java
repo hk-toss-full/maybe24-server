@@ -5,7 +5,6 @@ import com.example.reservation.request.ReservationRequest;
 import com.example.reservation.response.ReservationResponse;
 import com.example.reservation.service.ReservationService;
 import com.example.reservation.websocket.WebSocketService;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,20 +42,23 @@ public class ReservationController {
     */
     @PostMapping("/add")
     public ResponseEntity<String> addToQueueOrReservation(
-            @RequestParam String userId,
-            @RequestParam Long eventId) {
-        reservationService.addToQueueOrReservation(userId, eventId);
-        return ResponseEntity.ok("User added to queue or reservation list successfully.");
+            @RequestParam String userId) {
+        boolean enterReserved = reservationService.addToQueueOrReservation(userId);
+        if (enterReserved) {
+            return ResponseEntity.ok("예매를 진행합니다.");
+        } else {
+            return ResponseEntity.ok("예매 대기자에 추가되었습니다.");
+        }
     }
+
     /*
         대기열 상태 확인
     */
     @GetMapping("/status")
     public ResponseEntity<String> getQueueStatus(
-            @RequestParam String userId,
-            @RequestParam Long eventId) {
-        int position = reservationService.getQueuePosition(userId, eventId);
-        return ResponseEntity.ok("Your position in queue: " + position);
+            @RequestParam String userId) {
+        int position = reservationService.getQueuePosition(userId);
+        return ResponseEntity.ok("대기 순번: " + position);
     }
 
     /*
@@ -64,11 +66,18 @@ public class ReservationController {
     */
     @PostMapping("/proceed-to-payment")
     public ResponseEntity<String> proceedToPayment(
-            @RequestParam String userId,
-            @RequestParam Long eventId) {
-        reservationService.proceedToPayment(userId, eventId);
-        return ResponseEntity.ok("User removed from queue for payment.");
+            @RequestParam String userId) {
+        System.out.println("Received userId: " + userId);
+        boolean isMoveToPayment = reservationService.proceedToPayment(userId);
+        System.out.println("isMoveToPayment : " + isMoveToPayment );
+
+        if (isMoveToPayment) {
+            return ResponseEntity.ok("예매 중이던 사용자가 결제 페이지로 이동. 맨 앞 대기자가 예매 가능.");
+        } else {
+            return ResponseEntity.ok("찾을 수 없는 사용자입니다.");
+        }
     }
-
-
 }
+
+
+// queueId 로 queue 하나를 만드는거임

@@ -32,6 +32,9 @@ public class CustomSecurityConfig {
                                 "/auth/check-dup",
                                 "/api/v1/reserve",
                                 "/api/v1/reserve/{reservationId}/confirm",
+                                "/api/v1/reserve/add",
+                                "/api/v1/reserve/status",
+                                "/api/v1/reserve/proceed-to-payment",
                                 "/error"
                         )
                         .permitAll()

@@ -17,8 +17,12 @@ spring:
           uri: lb://USER
           predicates:
             - Path=/auth/**
+        - id: product-service
+          uri: lb://PRODUCT
+          predicates:
+            - Path=/product/**
+            - Method=POST, OPTIONS
         # add your service
-
 eureka:
   instance:
     prefer-ip-address: true

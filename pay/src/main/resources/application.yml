@@ -1,0 +1,25 @@
+server:
+  port: 9006
+
+spring:
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    config:
+      name: jwt
+      profile: default
+  application:
+    name: pay-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/pay?serverTimezone=Asia/Seoul
+    username: test
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+  jwt:
+    expiration: 1000000000
+    secret: rlaguswjdtlstkskdnslRKdkswdkdlTdj
+
+
